@@ -1,4 +1,5 @@
 // create a reference to the model
+const book = require('../models/book');
 let Book = require('../models/book');
 
 // Gets all books from the Database and renders the page to list all books.
@@ -44,7 +45,14 @@ module.exports.details = (req, res, next) => {
 // Renders the Add form using the add_edit.ejs template
 module.exports.displayAddPage = (req, res, next) => {
     
-    // ADD YOUR CODE HERE        
+    // ADD YOUR CODE HERE
+    
+    let newBook = Book();
+
+    res.render('book/add_edit', {
+        title: 'Add a new Book',
+        book: newBook
+    })      
 
 }
 
@@ -52,6 +60,32 @@ module.exports.displayAddPage = (req, res, next) => {
 module.exports.processAddPage = (req, res, next) => {
 
     // ADD YOUR CODE HERE
+    let id = req.params.id
+
+    let newBook = Book({
+        _id: req.body.id,
+        Title: req.body.Title,
+        Price: req.body.Price,
+        Description: req.body.Description,
+        Author: req.body.Author,
+        Genre: req.body.Genre,
+        
+        
+    });
+
+    Inventory.create(newBook, (err, book) =>{
+        if(err)
+        {
+            console.log(err);
+            res.end(err);
+        }
+        else
+        {
+            // refresh the book list
+            console.log(book);
+            res.redirect('/book/list');
+        }
+    });
 
 }
 
@@ -59,6 +93,23 @@ module.exports.processAddPage = (req, res, next) => {
 module.exports.displayEditPage = (req, res, next) => {
     
     // ADD YOUR CODE HERE
+    let id = req.params.id;
+
+    Book.findById(id, (err, bookToShow) => {
+        if(err)
+        {
+            console.log(err);
+            res.end(err);
+        }
+        else
+        {
+            //show the edit view
+            res.render('book/details', {
+                title: 'Book Details', 
+                book: bookToShow
+            })
+        }
+    });
 
 }
 
@@ -66,12 +117,51 @@ module.exports.displayEditPage = (req, res, next) => {
 module.exports.processEditPage = (req, res, next) => {
     
     // ADD YOUR CODE HERE
-    
+    let id = req.params.id
+
+    let updatedBook = Book({
+        _id: req.body.id,
+        Title: req.body.Title,
+        Price: req.body.Price,
+        Description: req.body.Description,
+        Author: req.body.Author,
+        Genre: req.body.Genre,
+        
+    });
+
+    Inventory.updateOne({_id: id}, updatedBook, (err) => {
+        if(err)
+        {
+            console.log(err);
+            res.end(err);
+        }
+        else
+        {
+            // console.log(req.body);
+            // refresh the book list
+            res.redirect('/book/list');
+        }
+    });
 }
 
 // Deletes a book based on its id.
 module.exports.performDelete = (req, res, next) => {
     
     // ADD YOUR CODE HERE
+
+    let id = req.params.id;
+
+    Book.remove({_id: id}, (err) => {
+        if(err)
+        {
+            console.log(err);
+            res.end(err);
+        }
+        else
+        {
+            // refresh the book list
+            res.redirect('/book/list');
+        }
+    });
 
 }
