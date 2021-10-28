@@ -1,3 +1,3 @@
 module.exports = {
-    "AtlasDB": ""
+    "AtlasDB": "mongodb://localhost/bookCollection"
 }

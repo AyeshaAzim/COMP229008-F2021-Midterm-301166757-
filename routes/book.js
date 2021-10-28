@@ -3,6 +3,9 @@ var router = express.Router();
 
 let bookController = require('../controllers/book');
 
+// Connect to our model
+let Book = require('../models/book');
+
 // Router for lists books function
 router.get('/list', bookController.bookList);
 

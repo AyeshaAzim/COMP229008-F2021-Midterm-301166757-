@@ -73,7 +73,7 @@ module.exports.processAddPage = (req, res, next) => {
         
     });
 
-    Inventory.create(newBook, (err, book) =>{
+    Book.create(newBook, (err, book) =>{
         if(err)
         {
             console.log(err);
@@ -104,7 +104,7 @@ module.exports.displayEditPage = (req, res, next) => {
         else
         {
             //show the edit view
-            res.render('book/details', {
+            res.render('book/add_edit', {
                 title: 'Book Details', 
                 book: bookToShow
             })
@@ -129,7 +129,7 @@ module.exports.processEditPage = (req, res, next) => {
         
     });
 
-    Inventory.updateOne({_id: id}, updatedBook, (err) => {
+    Book.updateOne({_id: id}, updatedBook, (err) => {
         if(err)
         {
             console.log(err);
