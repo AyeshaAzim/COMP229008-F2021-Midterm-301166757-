@@ -16,5 +16,18 @@
     "jquery": "^3.6.0",
     "mongoose": "^6.0.8",
     "morgan": "~1.9.1"
-  }
+  },
+  "description": "This is an initial project template for students to implement the remaining code, as per midterm test requirements.",
+  "main": "server.js",
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AyeshaAzim/Web-MidTerm-.git"
+  },
+  "author": "Ayesha",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AyeshaAzim/Web-MidTerm-/issues"
+  },
+  "homepage": "https://github.com/AyeshaAzim/Web-MidTerm-#readme"
 }
