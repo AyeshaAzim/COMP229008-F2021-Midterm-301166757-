@@ -46,6 +46,7 @@ module.exports.details = (req, res, next) => {
 module.exports.displayAddPage = (req, res, next) => {
     
     // ADD YOUR CODE HERE
+    //Code for "adding a new book" page
     
     let newBook = Book();
 
@@ -60,6 +61,7 @@ module.exports.displayAddPage = (req, res, next) => {
 module.exports.processAddPage = (req, res, next) => {
 
     // ADD YOUR CODE HERE
+    // Processes the insertion of new book in database 
     let id = req.params.id
 
     let newBook = Book({
@@ -93,6 +95,8 @@ module.exports.processAddPage = (req, res, next) => {
 module.exports.displayEditPage = (req, res, next) => {
     
     // ADD YOUR CODE HERE
+    //Renders the edit book page
+
     let id = req.params.id;
 
     Book.findById(id, (err, bookToShow) => {
@@ -104,7 +108,7 @@ module.exports.displayEditPage = (req, res, next) => {
         else
         {
             //show the edit view
-            res.render('book/add_edit', {
+            res.render('book/add_edit', { //renders add_edit page 
                 title: 'Book Details', 
                 book: bookToShow
             })
@@ -117,6 +121,8 @@ module.exports.displayEditPage = (req, res, next) => {
 module.exports.processEditPage = (req, res, next) => {
     
     // ADD YOUR CODE HERE
+    //Code for processing and updating the request of an existing book by its id
+
     let id = req.params.id
 
     let updatedBook = Book({
@@ -148,6 +154,7 @@ module.exports.processEditPage = (req, res, next) => {
 module.exports.performDelete = (req, res, next) => {
     
     // ADD YOUR CODE HERE
+    //Deletes an existing book upon request from the database
 
     let id = req.params.id;
 
